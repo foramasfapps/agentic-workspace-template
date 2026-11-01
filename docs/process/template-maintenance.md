@@ -22,11 +22,22 @@ Este documento es para quien trabaja **en el repositorio plantilla**, no en una 
 | Paso | Contenido | Estado |
 |---|---|---|
 | A1 | Esqueleto, CLAUDE.md y plantillas de documentos | Hecho |
-| A2 | Controles (hooks, permisos, CI, scripts) | Pendiente |
-| A3 | PM: `/discover`, `/spec`, `pm-reviewer` | Pendiente |
-| A4 | UX/UI: `/design-system`, `ux-designer`, `ui-reviewer` | Pendiente |
-| A5 | Arquitecto y `/design` | Pendiente |
-| A6 | Developer, `init.sh` y `/build` | Pendiente |
-| A7 | QA en tres modos | Pendiente |
-| A8 | `/close` y coherencia documental | Pendiente |
-| A9 | `/feature`, `/bootstrap`, ensayo y empaquetado | Pendiente |
+| A2 | Controles (hooks, permisos, CI, scripts) | Hecho (autotest: `scripts/test-harness.sh`) |
+| A3 | PM: `/discover`, `/spec`, `pm-reviewer` | Hecho |
+| A4 | UX/UI: `/design-system`, `ux-designer`, `ui-reviewer` | Hecho |
+| A5 | Arquitecto y `/design` | Hecho |
+| A6 | Developer, `init.sh` y `/build` | Hecho |
+| A7 | QA en tres modos | Hecho |
+| A8 | `/close` y coherencia documental | Hecho |
+| A9 | `/feature`, `/bootstrap` y guía de empaquetado (`packaging.md`) | Hecho |
+| A9b | **Ensayo** con una app de juguete por el ciclo completo | Pendiente: ver abajo |
+
+## Ensayo pendiente (A9b)
+
+Los controles están probados con `scripts/test-harness.sh`. Lo que aún no se ha probado es el **ciclo completo con agentes**. Para hacerlo:
+
+1. Crea un repositorio desde la plantilla (p. ej. `harness-sandbox`).
+2. `/bootstrap` con una app mínima: una lista de tareas con un único CRUD.
+3. Una funcionalidad de talla M por `/discover` → `/spec` → `/design` → `/build` → `/close`.
+4. Apunta en `lessons.md`: veces que hizo falta la persona fuera de las puertas, qué falló, consumo y tiempo.
+5. Trae a esta plantilla, con un PR, los arreglos que salgan.
