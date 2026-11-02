@@ -34,10 +34,14 @@
 |---|---|---|
 | {{…}} | {{…}} | {{…}} |
 
+## Lo que he entendido
+
+{{Devolución confirmada con la persona, en prosa: problema, usuarios, cómo es hoy, futuro deseado, cómo se imagina la app, éxito y qué no es. Con sus palabras.}}
+
 ## Mapa de funcionalidades
 
-Orden de construcción y porqué. Cada fila acaba siendo un PRD.
+Rebanadas pequeñas que se construyen y validan **una a una**: cada una da algo que se puede usar y probar de principio a fin. La primera es la versión más fina del recorrido principal. Ninguna es L. Cada fila acaba siendo un PRD.
 
-| # | Funcionalidad | Talla | Por qué en este orden |
-|---|---|---|---|
-| 01 | {{…}} | {{S/M/L}} | {{…}} |
+| # | Funcionalidad | Qué podrá probar la persona al terminarla | Talla | Por qué en este orden |
+|---|---|---|---|---|
+| 01 | {{…}} | {{…}} | {{S/M}} | {{…}} |
