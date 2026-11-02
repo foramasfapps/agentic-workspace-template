@@ -1,5 +1,5 @@
 {
-  "_readme": "Lista de tareas de la funcionalidad. La escribe el Arquitecto en /design y se aprueba en G2. Los agentes solo cambian 'status' (y 'acceptance_tests' en el caso de QA); añadir, borrar o reescribir tareas exige volver a G2. 'status': failing | passing | blocked. 'difficulty': normal | hard (hard sube el modelo y el esfuerzo del Developer). 'level': unit | integration | e2e.",
+  "_readme": "Lista de tareas de la funcionalidad. La escribe el Arquitecto en /design y se aprueba en G2. Los agentes solo cambian 'status' (y QA, 'acceptance_tests'); añadir, borrar o reescribir tareas exige volver a G2. 'status': failing | passing | blocked. 'difficulty': normal | hard (hard sube el modelo y el esfuerzo del Developer). 'checkpoint': true = /build para aquí y pide a la persona que pruebe lo construido. 'verify': comando que ejecuta archivos concretos (no filtros por nombre de test). Niveles de 'acceptance_tests': unit | integration | e2e; check.sh ejecuta los de las tareas en 'passing'.",
   "feature": "{{feature}}",
   "prd": "docs/product/prd-NN-{{feature}}.md",
   "approved": null,
@@ -10,7 +10,8 @@
       "covers": ["CA-01"],
       "depends_on": [],
       "difficulty": "normal",
-      "verify": "{{comando o test que demuestra que está hecha}}",
+      "checkpoint": false,
+      "verify": "{{comando sobre archivos concretos, p. ej. npx vitest run tests/acceptance/{{feature}}/ca-01.test.ts}}",
       "acceptance_tests": [
         { "ca": "CA-01", "level": "unit", "path": "tests/acceptance/{{feature}}/ca-01.test.ts" }
       ],

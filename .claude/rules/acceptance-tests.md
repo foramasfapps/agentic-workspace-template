@@ -1,7 +1,7 @@
 ---
 paths:
   - "tests/acceptance/**"
-  - "e2e/**"
+  - "e2e/acceptance/**"
 ---
 
 # Tests de aceptación

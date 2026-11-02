@@ -3,7 +3,8 @@
 --allow PREFIJO ...  solo deja escribir bajo esos prefijos.
 --deny PREFIJO ...   no deja escribir bajo esos prefijos.
 --deny-acceptance    no deja escribir en acceptance_test_paths de harness.json.
-La memoria de los agentes (.claude/agent-memory*/) siempre se permite."""
+La memoria de los agentes (.claude/agent-memory*/) y lo que queda fuera del proyecto
+(p. ej. el scratchpad) siempre se permiten."""
 import os
 import sys
 
@@ -28,7 +29,7 @@ if not path:
     sys.exit(0)
 r = rel(path)
 
-if r.startswith((".claude/agent-memory/", ".claude/agent-memory-local/")):
+if r.startswith((".claude/agent-memory/", ".claude/agent-memory-local/", "../")):
     sys.exit(0)
 if any(r.startswith(d) for d in deny):
     print(
