@@ -3,6 +3,8 @@
 > v1.1 · 01-11-2026 (QA en tres momentos y consumo de tokens) · Para crear el *workspace* agéntico de una app nueva (o de la v2 de Family Finance) con Claude Code.
 > **Cómo se usa:** copia cada prompt en una sesión nueva, en orden. Revisa lo que produce y haz commit antes de pasar al siguiente.
 
+> **Cambios en la v1.2 (02-11-2026), tras el primer ensayo:** entrevistas exploratorias del PM y de UX (explorar → reflejar → concretar → desafiar), construcción y validación funcionalidad a funcionalidad con puntos de validación, una sesión y un modelo por fase para bajar el consumo, y tests de aceptación que `check.sh` ejecuta solo cuando su tarea está terminada. Detalle en `rehearsals/01-harness-sandbox.md`; la plantilla manda sobre los prompts de este documento.
+
 ## Resumen
 
 1. **Se construye una vez y se reutiliza.** El arnés vive en un repositorio plantilla (`agentic-workspace-template`). Cada app nueva arranca desde él. Cuando esté estable, se puede empaquetar como plugin de Claude Code.

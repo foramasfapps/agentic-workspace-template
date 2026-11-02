@@ -4,9 +4,10 @@ Plantilla de **arnés agéntico** para construir apps con Claude Code: agentes c
 
 ## Uso
 
-1. Crea un repositorio nuevo a partir de esta plantilla (**Use this template**).
-2. Abre Claude Code en él y ejecuta `/bootstrap`.
-3. Para cada funcionalidad: `/feature <nombre>` te dice el siguiente paso.
+1. Crea un repositorio nuevo a partir de esta plantilla (**Use this template**) y protege su `main` (Settings → Rules: exigir PR y el check `check`).
+2. Abre Claude Code **dentro de ese repositorio**: en claude.ai/code, elígelo en el selector al crear la sesión; en local, clónalo y ejecuta `claude` en su carpeta. Si la sesión arranca en otra carpeta, los controles del arnés no se cargan.
+3. Escribe `/bootstrap` **en el chat de Claude Code** (no en la terminal).
+4. Para cada funcionalidad, `/feature <nombre>` te dice el siguiente paso. **Una sesión nueva (o `/clear`) por fase** ahorra muchos tokens.
 
 | Comando | Fase | Puerta |
 |---|---|---|

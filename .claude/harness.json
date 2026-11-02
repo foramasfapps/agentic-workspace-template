@@ -1,14 +1,20 @@
 {
-  "_readme": "Configuración del arnés. La rellena cada app en /bootstrap (B3). Un comando vacío se salta y se avisa. Ver docs/process/controls.md.",
+  "_readme": "Configuración del arnés. La rellena cada app en /bootstrap. \"\" = sin configurar (se avisa); null = no aplica en esta app (decisión aprobada, no se avisa). En acceptance, {files} se sustituye por los tests de aceptación de las tareas en 'passing'. Ver docs/process/controls.md.",
   "checks": {
     "typecheck": "",
     "lint": "",
-    "test": ""
+    "test": "",
+    "e2e": ""
+  },
+  "acceptance": {
+    "unit": "",
+    "integration": "",
+    "e2e": ""
   },
   "init": "",
   "protected_branches": ["main", "master"],
   "secret_files": [".env", ".env.*"],
   "secret_file_exceptions": [".env.example"],
   "production_command_patterns": [],
-  "acceptance_test_paths": ["tests/acceptance/", "e2e/"]
+  "acceptance_test_paths": ["tests/acceptance/", "e2e/acceptance/"]
 }

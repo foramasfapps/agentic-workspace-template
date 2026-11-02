@@ -30,14 +30,9 @@ Este documento es para quien trabaja **en el repositorio plantilla**, no en una 
 | A7 | QA en tres modos | Hecho |
 | A8 | `/close` y coherencia documental | Hecho |
 | A9 | `/feature`, `/bootstrap` y guía de empaquetado (`packaging.md`) | Hecho |
-| A9b | **Ensayo** con una app de juguete por el ciclo completo | Pendiente: ver abajo |
+| A9b | **Ensayo** con una app de juguete por el ciclo completo | Hecho (01-11-2026): [rehearsals/01-harness-sandbox.md](rehearsals/01-harness-sandbox.md) |
+| v1.1 | Cambios tras el ensayo: entrevistas exploratorias, validar por funcionalidad, consumo | Hecho (02-11-2026) |
 
-## Ensayo pendiente (A9b)
+## Ensayos
 
-Los controles están probados con `scripts/test-harness.sh`. Lo que aún no se ha probado es el **ciclo completo con agentes**. Para hacerlo:
-
-1. Crea un repositorio desde la plantilla (p. ej. `harness-sandbox`).
-2. `/bootstrap` con una app mínima: una lista de tareas con un único CRUD.
-3. Una funcionalidad de talla M por `/discover` → `/spec` → `/design` → `/build` → `/close`.
-4. Apunta en `lessons.md`: veces que hizo falta la persona fuera de las puertas, qué falló, consumo y tiempo.
-5. Trae a esta plantilla, con un PR, los arreglos que salgan.
+Cada ensayo queda en `rehearsals/` con su resultado, el feedback y lo que cambió. Próximo ensayo recomendado: la misma app con la v1.1, para comparar consumo y calidad de las entrevistas.

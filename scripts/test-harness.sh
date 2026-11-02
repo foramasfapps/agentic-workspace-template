@@ -5,7 +5,7 @@ set -u
 root="$(cd "$(dirname "$0")/.." && pwd)"
 tmp="$(mktemp -d)"
 trap 'rm -rf "$tmp"' EXIT
-cp -r "$root/.claude" "$tmp/"
+cp -r "$root/.claude" "$root/scripts" "$tmp/"
 cd "$tmp" || exit 1
 git init -q -b main && git -c user.email=t@t -c user.name=t commit -q --allow-empty -m init
 export CLAUDE_PROJECT_DIR="$tmp"
@@ -49,11 +49,40 @@ expect 0 "escribir código" "$(file_in "src/app.ts")" $H/guard_files.py
 
 echo "scope_guard"
 expect 2 "developer no edita tests de aceptación" "$(file_in "tests/acceptance/f/ca-01.test.ts")" $H/scope_guard.py --deny-acceptance
-expect 2 "developer no edita e2e" "$(file_in "e2e/f.spec.ts")" $H/scope_guard.py --deny-acceptance
+expect 2 "developer no edita e2e de aceptación" "$(file_in "e2e/acceptance/f/ca-01.spec.ts")" $H/scope_guard.py --deny-acceptance
+expect 0 "developer sí edita otros e2e (p. ej. smoke)" "$(file_in "e2e/smoke.spec.ts")" $H/scope_guard.py --deny-acceptance
 expect 0 "developer edita código" "$(file_in "src/app.ts")" $H/scope_guard.py --deny-acceptance
 expect 0 "UX escribe en docs/design" "$(file_in "docs/design/f/flows.md")" $H/scope_guard.py --allow docs/design/
 expect 2 "UX no escribe código" "$(file_in "src/app.ts")" $H/scope_guard.py --allow docs/design/
 expect 0 "memoria del agente siempre permitida" "$(file_in ".claude/agent-memory/qa/MEMORY.md")" $H/scope_guard.py --allow docs/design/
+
+expect 0 "fuera del proyecto (scratchpad) siempre permitido" '{"tool_name":"Write","tool_input":{"file_path":"/tmp/scratch/notas.md"}}' $H/scope_guard.py --allow docs/design/
+
+echo "check.sh"
+mkdir -p docs/delivery/f tests/acceptance/f
+echo ok > tests/acceptance/f/ca-01.test
+echo roto > tests/acceptance/f/ca-02.test
+cat > docs/delivery/f/tasks.json <<'JSON'
+{"tasks":[
+ {"id":"T-01","status":"passing","acceptance_tests":[{"ca":"CA-01","level":"unit","path":"tests/acceptance/f/ca-01.test"}]},
+ {"id":"T-02","status":"failing","acceptance_tests":[{"ca":"CA-02","level":"unit","path":"tests/acceptance/f/ca-02.test"}]}
+]}
+JSON
+python3 - <<'PY2'
+import json; p=".claude/harness.json"; c=json.load(open(p))
+c["checks"]={"typecheck":None,"lint":None,"test":None,"e2e":None}
+c["acceptance"]={"unit":"grep -L roto {files} | wc -l | grep -qx $(echo {files} | wc -w)","integration":None,"e2e":None}
+json.dump(c,open(p,"w"))
+PY2
+out="$(scripts/check.sh 2>&1)"; code=$?
+check() { if eval "$2"; then pass=$((pass+1)); echo "  ✓ $1"; else fail=$((fail+1)); echo "  ✗ $1"; echo "$out" | sed 's/^/      /'; fi; }
+check "solo ejecuta los tests de aceptación de tareas en passing" '[ $code -eq 0 ] && echo "$out" | grep -q "ca-01.test" && ! echo "$out" | grep -q "ca-02.test"'
+check "null = no aplica, sin avisos" '! echo "$out" | grep -q "sin configurar"'
+python3 - <<'PY2'
+import json; p="docs/delivery/f/tasks.json"; c=json.load(open(p)); c["tasks"][1]["status"]="passing"; json.dump(c,open(p,"w"))
+PY2
+out="$(scripts/check.sh 2>&1)"; code=$?
+check "un test de aceptación roto en una tarea passing pone check.sh en rojo" '[ $code -eq 2 ]'
 
 echo
 echo "Resultado: $pass correctas, $fail fallidas"

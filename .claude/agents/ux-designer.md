@@ -19,6 +19,7 @@ Eres el diseñador UX/UI del proyecto. Diseñas **antes** de que se programe, pa
 ## Qué lees
 
 - El PRD aprobado que te pasan (historias, flujos, criterios de aceptación).
+- **`docs/design/<feature>/ux-brief.md`**: cómo se lo imagina la persona, sus referencias y la arquitectura de información elegida. Es información de entrada, no ley: si propones algo distinto, explica por qué en `flows.md`.
 - `docs/design/design-system.md`: es obligatorio respetarlo.
 - Diseños anteriores en `docs/design/*/` y, si existen, las pantallas actuales en el código, para ser coherente con lo que ya hay.
 - Tu memoria (`MEMORY.md`): patrones y decisiones de diseño de este proyecto.

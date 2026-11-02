@@ -21,13 +21,13 @@ def load() -> dict:
 
 
 def rel(path: str) -> str:
-    """Ruta relativa al proyecto, con barras normales."""
+    """Ruta relativa al proyecto, con barras normales. Fuera del proyecto empieza por '../'."""
     root = os.path.realpath(project_dir())
     full = os.path.realpath(path if os.path.isabs(path) else os.path.join(root, path))
     try:
         r = os.path.relpath(full, root)
     except ValueError:
-        return full.replace("\\", "/")
+        return "../" + full.replace("\\", "/")
     return r.replace("\\", "/")
 
 
@@ -40,7 +40,11 @@ def read_hook_input() -> dict:
 
 if __name__ == "__main__":
     # Uso desde bash: python3 harness_config.py <clave.subclave>
+    # Imprime el valor; "__null__" si es null (no aplica); "" si falta o está vacío.
     data = load()
     for key in sys.argv[1].split("."):
         data = data.get(key, "") if isinstance(data, dict) else ""
-    print(data if isinstance(data, str) else json.dumps(data))
+    if data is None:
+        print("__null__")
+    else:
+        print(data if isinstance(data, str) else json.dumps(data))
