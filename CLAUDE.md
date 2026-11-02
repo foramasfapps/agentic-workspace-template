@@ -1,6 +1,6 @@
 # {{APP_NAME}}
 
-> Si esta línea y los marcadores `{{...}}` siguen sin rellenar, estás en el **repositorio plantilla**, no en una app: sigue `docs/process/template-maintenance.md` y no rellenes nada.
+> Si esta línea y los marcadores `{{...}}` siguen sin rellenar, estás en el **repositorio plantilla** o en una app sin arrancar. En la plantilla, sigue `docs/process/template-maintenance.md` y no rellenes nada. En una app nueva, ejecuta `/bootstrap`: rellenar esto es su trabajo.
 
 ## Qué es la app
 
@@ -36,6 +36,8 @@ Cada funcionalidad pasa por fases con una puerta de aprobación humana:
 2. `/design`: UX y Arquitecto preparan diseño, plan y `tasks.json` → **G2** (diseño y plan aprobados).
 3. `/build`: QA escribe los tests de aceptación, el Developer los pone en verde y QA verifica → **G3** (PR aprobado).
 4. `/close`: la documentación vuelve a reflejar lo construido.
+
+**Una funcionalidad cada vez**, pequeña y validada por la persona antes de pasar a la siguiente. **Una sesión nueva (o `/clear`) por fase**: las fases se pasan el trabajo con documentos, no con la conversación. Los comandos se escriben en el chat de Claude Code, no en la terminal.
 
 Solo cuenta como cierto lo que tiene `Estado: Aprobado (fecha)`. Si algo contradice la spec o el plan, no se improvisa: se apunta como bloqueo en `progress.md`.
 
